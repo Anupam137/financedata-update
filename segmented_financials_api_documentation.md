@@ -1,0 +1,195 @@
+# Segmented Financials - Segmented Revenues
+Get detailed, segmented revenue data for a ticker.
+
+## GET /financials/segmented-revenues
+
+Try it
+
+## 👋 Overview
+The segmented revenues API provides as-reported, granular revenue data for a given stock ticker.
+
+I finally launched the segmented revenues API, which lets your AI financial agent access segmented revenue data by product lines, business segments, and geographical regions for a given stock ticker.
+
+This includes revenue data segmented by:
+
+- product lines
+- business segments
+- geographical regions
+
+For example, Apple Inc. reports segmented revenue for its different product lines like iPhone, Mac, iPad, and wearables.
+
+Apple also reports segmented revenue for its different geographical regions like the Americas, Europe, and China.
+
+The segmented revenues API lets you easily access this data in a structured format:
+
+```json
+{
+  "segmented_revenues": [
+    {
+      "ticker": "AAPL",
+      "report_period": "2023-09-30",
+      "period": "annual",
+      "items": [
+        "...",
+        {
+          "line_item": "Revenue From Contract With Customer Excluding Assessed Tax",
+          "amount": 201183000000.0,
+          "end_period": "2024-09-28",
+          "start_period": "2023-10-01",
+          "segments": [
+              {
+                  "label": "IPhone",
+                  "type": "Product or Service"
+              }
+          ]
+        },
+        {
+          "line_item": "Revenue From Contract With Customer Excluding Assessed Tax",
+          "amount": 29984000000.0,
+          "end_period": "2024-09-28",
+          "start_period": "2023-10-01",
+          "segments": [
+              {
+                  "label": "Mac",
+                  "type": "Product or Service"
+              }
+          ]
+        },
+        {
+            "line_item": "Revenue From Contract With Customer Excluding Assessed Tax",
+            "amount": 167045000000.0,
+            "end_period": "2024-09-28",
+            "start_period": "2023-10-01",
+            "segments": [
+                {
+                    "label": "Americas",
+                    "type": "Statement Business Segments"
+                }
+            ]
+        },
+        {
+          "line_item": "Revenue From Contract With Customer Excluding Assessed Tax",
+          "amount": 101328000000.0,
+          "end_period": "2024-09-28",
+          "start_period": "2023-10-01",
+          "segments": [
+              {
+                  "label": "Europe",
+                  "type": "Statement Business Segments"
+              }
+          ]
+        },
+        {
+            "line_item": "Revenue From Contract With Customer Excluding Assessed Tax",
+            "amount": 66952000000.0,
+            "end_period": "2024-09-28",
+            "start_period": "2023-10-01",
+            "segments": [
+                {
+                    "label": "Greater China",
+                    "type": "Statement Business Segments"
+                }
+            ]
+        },
+        ...
+      ]
+    }
+  ]
+}
+```
+
+This data is pulled directly from XBRL filings (10-Ks and 10-Qs). We have included the original XBRL tags like key and axis in the response for your reference.
+
+To get started, please create an account and grab your API key at financialdatasets.ai.
+
+You will use the API key to authenticate your API requests.
+
+## 📊 Available Tickers
+You can fetch a list of available tickers with a GET request to: https://api.financialdatasets.ai/financials/segmented-revenue/tickers/
+
+## 🚀 Getting Started
+There are only 3 steps for making a successful API call:
+
+1. Add your API key to the header of the request as X-API-KEY.
+2. Add query params like ticker, period and limit to filter the data.
+3. Execute the API request.
+
+You can filter the data by ticker, period, limit, and cik.
+
+The period parameter can be set to "annual" or "quarterly". The limit parameter is used to specify the number of statements to return.
+
+Note: ticker and period are required. Alternatively, you can use cik instead of ticker as a company identifier in your request. By default, limit is 4.
+
+## 💻 Example
+Segmented Revenues
+
+```python
+import requests
+
+# add your API key to the headers
+headers = {
+    "X-API-KEY": "your_api_key_here"
+}
+
+# set your query params
+ticker = "AAPL"     # stock ticker
+period = "annual"   # possible values are "annual" or "quarterly"
+limit = 5           # number of statements to return
+
+# create the URL
+url = (
+    f'https://api.financialdatasets.ai/financials/segmented-revenues/'
+    f'?ticker={ticker}'
+    f'&period={period}'
+    f'&limit={limit}'
+)
+
+# make API request
+response = requests.get(url, headers=headers)
+
+# parse segmented_revenues from the response
+segmented_revenues = response.json().get('segmented_revenues')
+```
+
+## Authorizations
+
+**X-API-KEY**
+- string
+- header
+- required
+- API key for authentication.
+
+## Query Parameters
+
+**ticker**
+- string
+- required
+- The ticker symbol.
+
+**period**
+- enum<string>
+- required
+- The date or time period to which the reported revenue data relates in ISO 8601 format (YYYY-MM-DD).
+- Available options: annual, quarterly 
+
+**limit**
+- integer
+- The maximum number of revenue statements to return.
+
+**cik**
+- string
+- The Central Index Key (CIK) of the company.
+
+## Response
+200
+
+200
+application/json
+Segmented revenue response
+
+**segmented_revenues**
+- object[]
+
+Show child attributes
+
+## Items 
