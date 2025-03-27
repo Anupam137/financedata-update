@@ -1,0 +1,10 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+pydantic==2.6.1
+httpx==0.26.0
+python-dotenv==1.0.1
+openai==1.12.0
+redis==5.0.1
+sqlalchemy==2.0.27
+psycopg2-binary==2.9.9
+polygon-api-client==1.12.8 

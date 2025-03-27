@@ -1,0 +1,13 @@
+
+                # DeepSeek R1 Rate Limit Exceeded
+                
+                The Together.ai API rate limit has been exceeded. This typically happens when:
+                
+                1. Too many requests are made in a short period of time
+                2. You're using a free tier account with limited quota (60 requests per minute)
+                3. The API is experiencing high demand from other users
+                
+                Please try again later or consider upgrading your Together.ai account for higher rate limits.
+                
+                For now, I've used the data from Perplexity and other sources to provide the best analysis possible.
+                
